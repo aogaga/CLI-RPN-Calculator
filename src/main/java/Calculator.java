@@ -102,10 +102,15 @@ public class Calculator {
 
     private double division(){
         if(operandStack.size() == 1){
-            return operandStack.pop() / result;
+            double tmp = operandStack.pop() / result;
+
+            result = Double.isInfinite(tmp) ? result : tmp;
+            return result;
         }
         double last = operandStack.pop();
-        return  result + (operandStack.pop() / last);
+        double tmp = result + (operandStack.pop() / last);
+        result = Double.isInfinite(tmp) ? result : tmp;
+        return result;
     }
 
 }
