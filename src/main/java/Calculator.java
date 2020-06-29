@@ -10,8 +10,7 @@ public class Calculator {
 
     public void runCalculator(){
         System.out.print("Enter X or Q to quit:");
-
-
+        
         while(!quit || !clear){
 
             System.out.print(" > ");
@@ -76,19 +75,15 @@ public class Calculator {
         }
 
     }
-
-
+    
     private double addition(){
         if(operandStack.size() == 1){
             return (operandStack.pop() + result);
         }
         double last = operandStack.pop();
         return  result + (operandStack.pop() + last);
-
-
     }
-
-
+    
     private double subtraction(){
         if(operandStack.size() == 1){
           return (result - operandStack.pop());
