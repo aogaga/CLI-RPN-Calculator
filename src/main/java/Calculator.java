@@ -5,27 +5,32 @@ public class Calculator {
     private Stack<Double> operandStack = new Stack<Double>();
     private Scanner scanner = new Scanner(System.in);
     private Double result = 0.00;
+    boolean quit = false;
+    boolean clear = false;
 
     public void runCalculator(){
         System.out.print("Enter X or Q to quit:");
 
-        boolean quit = false;
-        boolean clear = false;
-
 
         while(!quit || !clear){
+
             System.out.print(" > ");
             String input = scanner.next();
+
             if(input.equals("+") || input.equals("-") || input.equals("*") || input.equals("/")){
-                determineMathOperation(input);
+
+                if(operandStack.isEmpty()){
+                    System.out.println("No inputs to operate on");
+                }else {
+                    determineMathOperation(input);
+                }
 
             } else if (input.toLowerCase().equals("q") || input.toLowerCase().equals("x") ){
-                System.out.println("Good Bye!!!");
-                quit = true;
+                quit();
+                return; 
             }else if(input.toLowerCase().equals("c")){
                 clear();
             }else {
-
                 try{
                     Double temp =  Double.parseDouble(input);
                     operandStack.push(temp);
@@ -36,6 +41,11 @@ public class Calculator {
             }
         }
 
+    }
+
+    private void quit() {
+        quit = true;
+        System.out.println("Good Bye!!!");
     }
 
     private void clear() {
